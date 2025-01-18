@@ -25,9 +25,40 @@
       src={Routes.static_path(@conn, "/js/app.js")}
     >
     </script>
+    <script type="text/javascript">
+          // this function must stay inline in head to avoid FOUC 
+          function apply_theme(){
+              document.documentElement.classList.toggle(
+              'dark',
+              localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            )
+          }
+          apply_theme()
+
+      /**
+      * Switches theme.
+      * @see https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection
+      * @param {"dark"|"light"|"system"} mode 
+      */
+      function switch_theme (mode){
+        if(mode==='dark') {
+            localStorage.theme = 'dark'
+        }
+        if(mode==='light') {
+            localStorage.theme = 'light' 
+        }
+        if(mode==='system') {
+            localStorage.removeItem('theme')
+        }
+        // relies on function apply_theme() defined inline in head in HTML root (explained there)
+        window.apply_theme()
+      } 
+
+        
+    </script>
   </head>
   <%= if @current_user do %>
-    <body class="grid grid-cols-1 sm:grid-cols-[16em,1fr]">
+    <body class="bg-white dark:bg-black grid grid-cols-1 sm:grid-cols-[16em,1fr]">
       <%= render("_menu.html", assigns) %>
       <div>
         <%= @inner_content %>
@@ -35,7 +66,7 @@
       </div>
     </body>
   <% else %>
-    <body class="grid grid-cols-1">
+    <body class="bg-white dark:bg-black grid grid-cols-1">
       <%= render("_menu.html", assigns) %>
       <%= @inner_content %>
       <%= render("_footer.html", assigns) %>

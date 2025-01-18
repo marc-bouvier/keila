@@ -1,4 +1,13 @@
-<main role="main" class="static-container flex-grow bg-gray-950 text-gray-300 min-h-screen">
+<main
+  role="main"
+  class="static-container flex-grow bg-white text-black dark:bg-gray-950 dark:text-gray-300 min-h-screen"
+>
+  <select name="theme" onchange="window.switch_theme(event.target.value)">
+    <option value="dark">Dark</option>
+    <option value="light">Light</option>
+    <option value="system">System</option>
+  </select>
+
   <%= if get_flash(@conn, :info) do %>
     <div class="bg-emerald-200 text-black" role="alert">
       <p class="container py-5 my-0"><%= get_flash(@conn, :info) %></p>

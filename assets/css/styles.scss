@@ -152,7 +152,7 @@ input[disabled] {
 }
 
 .bg-onboarding {
-  @apply bg-gradient-to-r from-red-900 via-indigo-900 to-emerald-900;
+  @apply bg-gradient-to-r from-red-200 via-indigo-200 to-emerald-200 dark:from-red-900 dark:via-indigo-900 dark:to-emerald-900;
 }
 
 /*

@@ -1,6 +1,6 @@
 module.exports = {
   content: ["./js/**/*.js", "./css/**/*.*css", "../lib/*_web/**/*.*ex"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'selector', // or 'media' or 'selector'
   theme: {
     extend: {
       colors: {
